@@ -217,7 +217,7 @@ const usedTokens = new Set();
 
 // JWT Configuration
 const JWT_SECRET = process.env.JWT_SECRET || 'your-strong-secret-key-here';
-const JWT_EXPIRES_IN = '2m';
+const JWT_EXPIRES_IN = '3m';
 
 // Generate one-time token with additional fingerprint
 app.get('/api/token', (req, res) => {

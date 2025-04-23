@@ -22,13 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
+                // Get the submit button and store original text
+                const submitButton = e.target.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.textContent;
+                
+                // Change button text to "Sending..."
+                submitButton.textContent = 'Sending...';
+                
                 // Reset status message styling first
                 messageStatus.classList.remove('hidden', 'text-red-600', 'text-white', 'bg-green-600', 'py-2', 'px-2', 'rounded-lg');
                 
                 if (!token) {
                     messageStatus.textContent = 'Security token not available. Please refresh the page.';
                     messageStatus.classList.add('text-red-600');
-                    setTimeout(() => messageStatus.classList.add('hidden'), 2000);
+                    setTimeout(() => messageStatus.classList.add('hidden'), 3000);
+                    submitButton.textContent = originalButtonText; // Revert button text
                     return;
                 }
             
@@ -78,14 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         token = null;
                         
                         // Auto-hide success message after 3 seconds
-                        setTimeout(() => messageStatus.classList.add('hidden'), 2000);
+                        setTimeout(() => messageStatus.classList.add('hidden'), 3000);
                     } else {
                         messageStatus.textContent = responseData.error || 'Error sending message';
                         messageStatus.classList.add('text-red-600');
                         form.reset();
                         
                         // Auto-hide error message after 3 seconds
-                        setTimeout(() => messageStatus.classList.add('hidden'), 2000);
+                        setTimeout(() => messageStatus.classList.add('hidden'), 3000);
                     }
                 } catch (error) {
                     console.error('Error:', error);
@@ -94,7 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     form.reset();
                     
                     // Auto-hide error message after 3 seconds
-                    setTimeout(() => messageStatus.classList.add('hidden'), 2000);
+                    setTimeout(() => messageStatus.classList.add('hidden'), 3000);
+                } finally {
+                    // Always revert button text to original
+                    submitButton.textContent = originalButtonText;
                 }
             });
             } else if (document.getElementById('messagesTable')) {

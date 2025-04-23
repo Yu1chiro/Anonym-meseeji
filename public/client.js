@@ -127,13 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
               
                       messagesTable.innerHTML = messages.map(msg => `
                         <tr data-id="${msg._id}" class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-500">
                           ${new Date(msg.createdAt).toLocaleString()}
                         </td>
-                          <td class="px-6 py-4 whitespace-pre-wrap text-sm text-gray-500">${msg.message}</td>
-                          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <td class="px-3 py-3 whitespace-pre-wrap text-sm text-gray-500">${msg.message}</td>
+                          <td class="px-3 py-3">
                             <button 
-                              class="delete-btn px-3 py-3 bg-red-600 text-white rounded-lg"
+                              class="delete-btn text-red-500 hover:text-red-700 font-semibold"
                               data-id="${msg._id}"
                             >
                               Delete
